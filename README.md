@@ -6,8 +6,8 @@ This repository contains a set of scripts that perform (constrained) Sharpe Rati
 
 In order to use the sharpe ration maximization scripts in this repository:
 - You must be using Mac OSX or Linux
-- You must have installed (`R` programming language)[https://www.r-project.org/], version 3 or later
-- You must have installed the (quadprog)[https://cran.r-project.org/web/packages/quadprog/quadprog.pdf] library
+- You must have installed [`R` programming language](https://www.r-project.org/), version 3 or later
+- You must have installed the [quadprog](https://cran.r-project.org/web/packages/quadprog/quadprog.pdf) library
 - You must navigate to this repository after cloning it 
 ```
 git clone https://…/sharpemax.git
@@ -17,7 +17,7 @@ before executing any of the scripts therein
 
 ### Unconstrained
 
-Format your returns data as a CSV that has the asset names as the column headers and the returns down each column, however do not include a date column and make sure instead of percent (12, -3, etc) you use raw numbers (.12, -.03, etc). To obtain the optimal portfolio weights, simply run the following in command line
+Format your returns data as a CSV that has the asset names as the column headers and the returns down each column, however do not include a date column and make sure instead of percent `(12, -3, …)` you use raw numbers `(.12, -.03, …)`. To obtain the optimal portfolio weights, simply run the following in command line
 
 ```
 Rscript --vanilla ./maxSharpe.R /path/to/your/data.csv
@@ -27,13 +27,13 @@ and it will output `maxSharpe.csv` containing portfolio weights to the root of t
 
 ### Robust Sharpe Ratio
 
-The sharpe ratio is the ratio between the mean and variance. However, the simple arithmetic estimators for both statistics are not impervious to outliers or extreme events (which are common in financial time series). The provided script `maxSharpeRobust.R` functions exactly like `maxSharpe.R`,
+The sharpe ratio is the ratio between the mean and variance. However, the simple arithmetic estimators for both statistics are not impervious to outliers or extreme events (which are common in financial time series) and, in the case of covariance, underestimates non-linear monotonic relationships. The provided script `maxSharpeRobust.R` functions exactly like `maxSharpe.R`,
 
 ```
 Rscript --vanilla ./maxSharpeRobust.R /path/to/your/data.csv
 ```
 
-however, internally it uses the truncated mean in place of the mean and Spearman’s rank covariance in place of the covariance. This ultimately results in a Sharpe ratio that is less statistically efficient and biased, but significantly more robust.
+however, internally it uses the truncated mean in place of the arithmetic mean and [Spearman’s rank covariance](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) in place of the arithmetic covariance. This ultimately results in a Sharpe ratio that is less statistically efficient, but significantly more robust.
 
 ### Imposing Constraints
 
@@ -57,7 +57,7 @@ Where `totalNumberOfStrategies` is a positive integer specifying how many sets o
 
 ### Sortino Ratio Maximization
 
-Additionally included is a script `maxSortinoConstrainedLoop.R` which attempts to maximize the (Sortino)[] ratio instead of the Sharpe ratio, using the (Estrada’s method)[http://webprofesores.iese.edu/jestrada/PDF/Research/Refereed/MSO.pdf] for estimating the semi-covariance matrix. If the semi-covariance matrix is indefinite, it is projected onto the semidefinite cone so that the underlying optimization problem remains convex.
+Additionally included is a script `maxSortinoConstrainedLoop.R` which attempts to maximize the [Sortino](http://www.investopedia.com/terms/s/sortinoratio.asp) ratio instead of the Sharpe ratio, using [Estrada’s method](http://webprofesores.iese.edu/jestrada/PDF/Research/Refereed/MSO.pdf) for estimating the semi-covariance matrix. If the semi-covariance matrix is indefinite, it is projected onto the semidefinite cone so that the underlying optimization problem remains convex.
 
 The `maxSortinoConstrainedLoop.R` script functions just like `maxSharpeConstrainedLoop.R`
 
