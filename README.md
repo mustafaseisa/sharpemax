@@ -17,7 +17,7 @@ before executing any of the scripts therein
 
 ### Unconstrained
 
-Format your returns data as a CSV that has the asset names as the column headers and the returns down each column, however do not include a date column and make sure instead of percent `(12, -3, …)` you use raw numbers `(.12, -.03, …)`. To obtain the optimal portfolio weights, simply run the following in command line
+Format your returns data as a `csv` that has the asset names as the column headers and the returns down each column, however do not include a date column and make sure instead of percent `(12, -3, …)` you use raw numbers `(.12, -.03, …)`. To obtain the optimal portfolio weights, simply run the following in command line
 
 ```
 Rscript --vanilla ./maxSharpe.R /path/to/your/data.csv
